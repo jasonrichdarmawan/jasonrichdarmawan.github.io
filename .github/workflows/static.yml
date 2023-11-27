@@ -36,13 +36,21 @@ jobs:
       - name: Inject short SHA into index.html
         run: sed -i "s/{{short_sha}}/${GITHUB_SHA::7}/g" index.html
 
+      # Create a folder with the commit SHA as the name
+      - name: Create versioned folder
+        run: mkdir "version/${GITHUB_SHA::7}"
+
+      # Copy the distribution to the versioned folder
+      - name: Copy the distribution to the versioned folder.
+        run: rsync -av --progress --exclude='version/' ./ "version/${GITHUB_SHA::7}/"
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: '.'
+          path: 'version/${GITHUB_SHA::7}'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
