@@ -33,6 +33,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set commit short SHA as an environment variable
+        run: echo "COMMIT_SHA_SHORT=$(echo ${GITHUB_SHA::7})" >> $GITHUB_ENV
+
       # Inject the commit SHA as a variable in the index.html file
       - name: Inject short SHA into index.html
         run: sed -i "s/{{short_sha}}/${GITHUB_SHA::7}/g" index.html
@@ -51,7 +54,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: "version/${{COMMIT_SHA_SHORT}}"
+          path: "version/${COMMIT_SHA_SHORT}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
