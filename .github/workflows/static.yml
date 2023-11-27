@@ -34,7 +34,7 @@ jobs:
 
       # Inject the commit SHA as a variable in the index.html file
       - name: Inject short SHA into index.html
-        run: sed -i "s/{{short_sha}}/${{GITHUB_SHA::7}}/g" index.html
+        run: sed -i "s/{{short_sha}}/${GITHUB_SHA::7}/g" index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
