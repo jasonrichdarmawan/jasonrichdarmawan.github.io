@@ -38,7 +38,7 @@ jobs:
 
       # Create a folder with the commit SHA as the name
       - name: Create versioned folder
-        run: mkdir "version/${GITHUB_SHA::7}"
+        run: mkdir -p "version/${GITHUB_SHA::7}"
 
       # Copy the distribution to the versioned folder
       - name: Copy the distribution to the versioned folder.
