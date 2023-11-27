@@ -31,9 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      # Extract the short commit SHA
+      - name: Get Short SHA
+        id: short_sha
+        run: echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
+
       # Inject the commit SHA as a variable in the index.html file
       - name: Inject short SHA into index.html
         run: sed -i "s/{{short_sha}}/${{ steps.vars.outputs.short_sha }}/g" index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
