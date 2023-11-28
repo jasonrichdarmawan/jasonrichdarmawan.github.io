@@ -58,8 +58,9 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
 
-      # THIS IS WHERE THE DATA IS PUBLISHED TO A BRANCH
-      - name: Deploy
+      - run: rm -rf .git
+
+      - name: Deploy to branch
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
