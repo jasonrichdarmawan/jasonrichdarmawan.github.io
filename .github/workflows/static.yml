@@ -58,12 +58,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
 
-      - run: rm -rf .git
-
       - name: Deploy to branch
         uses: s0/git-publish-subdir-action@master
         env:
-          REPO: self
+          REPO: git@github.com:jasonrichdarmawan/jasonrichdarmawan.github.io.git
           BRANCH: deployment
           FOLDER: version/${{ env.COMMIT_SHA_SHORT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
