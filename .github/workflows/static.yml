@@ -58,11 +58,11 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
 
-    # THIS IS WHERE THE DATA IS PUBLISHED TO A BRANCH
-    - name: Deploy
-      uses: s0/git-publish-subdir-action@master
-      env:
-        REPO: self
-        BRANCH: version/${{ env.COMMIT_SHA_SHORT }}
-        FOLDER: version/${{ env.COMMIT_SHA_SHORT }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # THIS IS WHERE THE DATA IS PUBLISHED TO A BRANCH
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@master
+        env:
+          REPO: self
+          BRANCH: version/${{ env.COMMIT_SHA_SHORT }}
+          FOLDER: version/${{ env.COMMIT_SHA_SHORT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
