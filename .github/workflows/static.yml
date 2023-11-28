@@ -50,12 +50,19 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
-        env:
-          COMMIT_SHA_SHORT: ${{ env.COMMIT_SHA_SHORT }}
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: version
+          path: .
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+    # THIS IS WHERE THE DATA IS PUBLISHED TO A BRANCH
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@master
+      env:
+        REPO: self
+        BRANCH: version/${{ env.COMMIT_SHA_SHORT }}
+        FOLDER: version/${{ env.COMMIT_SHA_SHORT }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
