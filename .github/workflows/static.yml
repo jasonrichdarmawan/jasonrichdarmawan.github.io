@@ -63,6 +63,6 @@ jobs:
         uses: s0/git-publish-subdir-action@master
         env:
           REPO: self
-          BRANCH: version/${{ env.COMMIT_SHA_SHORT }}
+          BRANCH: deployment
           FOLDER: version/${{ env.COMMIT_SHA_SHORT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
